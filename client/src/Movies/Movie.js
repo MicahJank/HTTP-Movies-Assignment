@@ -5,7 +5,8 @@ export default class Movie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movie: null
+      movie: null,
+      editing: false
     };
   }
 
@@ -31,6 +32,13 @@ export default class Movie extends React.Component {
     addToSavedList(this.state.movie);
   };
 
+  toggleEditMovie = () => {
+    this.setState({
+      ...this.state,
+      editing: !this.state.editing
+    })
+  }
+
   render() {
     if (!this.state.movie) {
       return <div>Loading movie information...</div>; 
@@ -38,12 +46,15 @@ export default class Movie extends React.Component {
 
     return (
       <div className="save-wrapper">
-        <MovieCard movie={this.state.movie} />
+        <MovieCard editing={this.state.editing} movie={this.state.movie} />
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
-        <div className="edit-button" onClick={this.saveMovie}>
+        <div className={`edit-button ${this.state.editing ? 'hidden' : ''}`} onClick={this.toggleEditMovie}>
           Edit
+        </div>
+        <div className={`submit-button ${!this.state.editing ? 'hidden' : ''}`} onClick={this.toggleEditMovie}>
+          Submit
         </div>
       </div>
     );

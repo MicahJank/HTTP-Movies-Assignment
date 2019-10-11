@@ -64,6 +64,23 @@ body {
 .save-button:hover {
   background-color: green;
   color: white;
+  cursor: pointer;
+}
+
+.edit-button {
+  position: absolute;
+  width: 40px;
+  text-align: center;
+  bottom: 25px;
+  right: 25px;
+  border: 1px solid grey;
+  padding: 5px 10px;
+  background-color: rgb(247, 195, 84);
+}
+.edit-button:hover {
+  background-color: rgb(54, 61, 54);
+  color: white;
+  cursor: pointer;
 }
 
 .home-button {

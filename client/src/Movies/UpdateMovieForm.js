@@ -21,6 +21,7 @@ const UpdateMovieForm = ({ movie, editing, toggleEdit, movieState, routeProps })
             .then(res => {
                routeProps.history.push('/');
             })
+            .catch(err => console.log(err));
     }
 
 

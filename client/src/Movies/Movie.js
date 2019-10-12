@@ -46,15 +46,12 @@ export default class Movie extends React.Component {
 
     return (
       <div className="save-wrapper">
-        <MovieCard editing={this.state.editing} movie={this.state.movie} />
+        <MovieCard props={this.props} state={this.state} toggleEdit={this.toggleEditMovie} editing={this.state.editing} movie={this.state.movie} />
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
         <div className={`edit-button ${this.state.editing ? 'hidden' : ''}`} onClick={this.toggleEditMovie}>
           Edit
-        </div>
-        <div className={`submit-button ${!this.state.editing ? 'hidden' : ''}`} onClick={this.toggleEditMovie}>
-          Submit
         </div>
       </div>
     );

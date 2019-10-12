@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
+import axios from 'axios';
 
-const UpdateMovieForm = ({ movie, editing }) => {
+
+const UpdateMovieForm = ({ movie, editing, toggleEdit, movieState, routeProps }) => {
 
     const [state, setState] = useState(movie);
 
@@ -13,9 +15,17 @@ const UpdateMovieForm = ({ movie, editing }) => {
 
     }
 
+    const submitHandler = (e) => {
+        e.preventDefault();
+        axios.put(`http://localhost:5000/api/movies/${movie.id}`, state)
+            .then(res => {
+               routeProps.history.push('/');
+            })
+    }
+
 
     return (
-        <form className={`movie-form ${editing ? 'editing' : ''}`}>
+        <form onSubmit={submitHandler} className={`movie-form ${editing ? 'editing' : ''}`}>
             <h2 className={!editing ? 'active' : 'hidden'}>{movie.title}</h2>
             <input className={`movie-name ${editing ? 'active' : 'hidden'}`}
                 type='text'
@@ -63,6 +73,9 @@ const UpdateMovieForm = ({ movie, editing }) => {
                 value={state.stars[2] || ''}
                 onChange={handleChange}
             />
+        <button className={`submit-button ${!movieState.editing ? 'hidden' : ''}`} onClick={toggleEdit}>
+          Submit
+        </button>
         </form>
     )
 }
